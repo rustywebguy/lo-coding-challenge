@@ -16,12 +16,6 @@
   make run && make install
 ```
 
-## Run tests
-
-```
-  make test
-```
-
 ## Run parse service log command
 Enter into the container with:
 ```
@@ -29,7 +23,13 @@ Enter into the container with:
 ```
 Run the database migration:
 ```
+  php bin/console doctrine:database:create
   php bin/console doctrine:migrations:migrate
+```
+and to setup test database:
+```
+  php bin/console --env=test doctrine:database:create
+  php bin/console --env=test doctrine:schema:create
 ```
 Run the console command:
 ```
@@ -44,6 +44,12 @@ To access the log analytics API:
 You can also see the log analytics API specification here:
 ```
   http://localhost:9002/specification
+```
+
+## To Run tests
+
+```
+  make test
 ```
 
 Note: due to time constraint not all test cases are covered.

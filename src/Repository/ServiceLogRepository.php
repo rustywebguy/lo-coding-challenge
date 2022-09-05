@@ -28,6 +28,8 @@ class ServiceLogRepository extends ServiceEntityRepository
     }
 
     /**
+     * Bulk insert using raw mysql query
+     *
      * @param RequestLog[] $requestLogs
      *
      * @throws ServiceLogRepositoryException
@@ -74,6 +76,8 @@ class ServiceLogRepository extends ServiceEntityRepository
 
         $query = $request->query;
 
+        // added for each of the columns single
+        // and composite index for faster search
         if ($serviceNames = $query->get('serviceNames')) {
             $serviceNames = explode(',', $serviceNames);
             $queryBuilder->andWhere('sl.name IN (:names)')
